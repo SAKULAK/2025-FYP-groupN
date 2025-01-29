@@ -171,4 +171,4 @@ cython_debug/
 .pypirc
 
 # Ignore Images in data file
-.data/
+data/
