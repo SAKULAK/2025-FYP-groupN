@@ -101,15 +101,3 @@ class ImageDataLoader():
         else:
             self.__iter_num__ += 1
             return self.image_data[self.__iter_num__-1]
-        
-
-images = ImageDataLoader(r"C:\Users\skysk\OneDrive - ITU\school\UNI 2nd semester\Projects in Data Science\smallData")
-images.FetchData(histogram_equalization=True)
-images.DisplayImage(8)
-# images.DisplayImage(3, "rgb")
-images.DisplayImage(8, "gray")
-
-# for img in images:
-#     cv2.imshow("Image", img[2])
-#     cv2.waitKey(0)
-    
