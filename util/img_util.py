@@ -1,6 +1,7 @@
 import random
-
+import glob
 import cv2
+import skimage
 
 
 def readImageFile(file_path):
@@ -32,28 +33,83 @@ def saveImageFile(img_rgb, file_path):
         return False
 
 
-class ImageDataLoader:
-    def __init__(self, directory, shuffle=False, transform=None):
-        self.directory = directory
-        self.shuffle = shuffle
-        self.transform = transform
+class ImageDataLoader():
 
-        # get a sorted list of all files in the directory
-        # fill in with your own code below
+    def __init__(self, directory: str, shuffle: bool=False, transform: bool=False):
+        """"Load directory of images."""
+        self.__iter_num__ = 0
+        self.directory: str = directory
+        self.shuffle: bool = shuffle
+        self.transform: bool = transform
+        self.fileList: list = glob.glob(directory+"\*")
 
-        if not self.file_list:
-            raise ValueError("No image files found in the directory.")
-
-        # shuffle file list if required
+        if not self.fileList:
+            raise ValueError("Image files not found in the directory.")
+        
         if self.shuffle:
-            random.shuffle(self.file_list)
+            random.shuffle(self.fileList)
 
-        # get the total number of batches
-        self.num_batches = len(self.file_list)
+        self.num_files: int = len((self.fileList))
+        
+        self.image_data: list = list()
+
+    def FetchData(self, denoising: bool=True, histogram_equalization: bool=True):
+        """Loads image data into a list with each entry being [imgage_bgr_data, image_rgb_data, image_greyscale_data]"""
+        self.image_data = [[raw_data := cv2.imread(img_path), cv2.cvtColor(raw_data, cv2.COLOR_BGR2RGB), cv2.cvtColor(raw_data, cv2.COLOR_BGR2GRAY)] for img_path in self.fileList]
+        if denoising:
+            for image in self.image_data:
+                image[0] = cv2.fastNlMeansDenoisingColored(image[0],None,10,10,7,21)
+                image[1] = cv2.fastNlMeansDenoisingColored(image[1],None,10,10,7,21)
+                image[2] = cv2.fastNlMeansDenoising(image[2],None,10,7,21)
+            pass
+        if histogram_equalization:
+            for image in self.image_data:
+                image[2] = skimage.exposure.equalize_hist(image[2])
+            pass
+        return self.image_data
+    
+    def DisplayImage(self, index: int, color: str = "bgr"):
+        """Displays an image from ImageDataLoader.image_data. Color must be "bgr", "rgb, or "gray".
+        If data has not been fetched, runs ImageDataLoader.FetchData
+        """
+
+        if not self.image_data:
+            self.FetchData()
+
+        def showImg(image):
+            cv2.imshow("Image", image)
+            cv2.waitKey(0)
+        
+        translation_dict = {"bgr": 0, "rgb": 1, "gray": 2}
+        try:
+            image = self.image_data[index][translation_dict[color]]
+
+        except KeyError as e:
+            raise KeyError("Color data not found. Color variable must be 'bgr', 'rgb', or 'gray'.\n", e)
+        
+        showImg(image)
 
     def __len__(self):
-        return self.num_batches
-
+        return self.num_files
+    
     def __iter__(self):
-        # fill in with your own code below
-        pass
+        return self
+    
+    def __next__(self):
+        if self.__iter_num__+1 > self.num_files:
+            raise StopIteration
+        else:
+            self.__iter_num__ += 1
+            return self.image_data[self.__iter_num__-1]
+        
+
+images = ImageDataLoader(r"C:\Users\skysk\OneDrive - ITU\school\UNI 2nd semester\Projects in Data Science\smallData")
+images.FetchData(histogram_equalization=True)
+images.DisplayImage(8)
+# images.DisplayImage(3, "rgb")
+images.DisplayImage(8, "gray")
+
+# for img in images:
+#     cv2.imshow("Image", img[2])
+#     cv2.waitKey(0)
+    
