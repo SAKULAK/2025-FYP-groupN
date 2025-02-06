@@ -1,5 +1,5 @@
 import random
-import glob
+import os
 import cv2
 import skimage
 
@@ -41,7 +41,10 @@ class ImageDataLoader():
         self.directory: str = directory
         self.shuffle: bool = shuffle
         self.transform: bool = transform
-        self.fileList: list = glob.glob(directory+"\*")
+        self.fileList: list = sorted(
+            [os.path.join(directory, f) for f in os.listdir(directory) if
+             f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff'))]
+        )
 
         if not self.fileList:
             raise ValueError("Image files not found in the directory.")
@@ -93,6 +96,7 @@ class ImageDataLoader():
         return self.num_files
     
     def __iter__(self):
+        self.__iter_num__ = 0
         return self
     
     def __next__(self):
