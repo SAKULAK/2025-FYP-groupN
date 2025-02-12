@@ -34,10 +34,11 @@ def saveImageFile(img_rgb, file_path):
 
 
 class ImageDataLoader:
-    def __init__(self, directory, shuffle=False, transform=None):
+    def __init__(self, directory, shuffle=False, transform=None, bounds =[0,2295]):
         self.directory = directory
         self.shuffle = shuffle
         self.transform = transform
+        self.bounds = bounds
 
         # get a sorted list of all image files in the directory
         self.file_list = sorted(
@@ -59,7 +60,7 @@ class ImageDataLoader:
         return self.num_sample
 
     def __iter__(self):
-        for file_path in self.file_list:
+        for file_path in self.file_list[(self.bounds[0]+1):(self.bounds[1]+2)]:
             img_rgb, img_gray = readImageFile(file_path)
 
             if self.transform:
