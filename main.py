@@ -8,7 +8,8 @@ from util.inpaint_util import removeHair
 data_dir = "./data"
 save_dir = './result'
 
-i=0
+i=1703
+
 # read all image files in data_dir, remove hair and save the result
 for img_rgb, img_gray in ImageDataLoader(data_dir):
     _, _, img_out = removeHair(img_rgb, img_gray)
