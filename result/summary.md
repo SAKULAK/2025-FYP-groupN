@@ -21,9 +21,9 @@ Hair Segmentation Examples
 
 In step three of our project we segmented hair with TELEA method, based on the template code from the lecture. Below are examples of visually successful and unsuccessful results:
 Good Visual Results
-![Example of good segmentation 1](result/output1739.jpg)
-![Example of good segmentation 2](result/output1757.jpg)
+![Example of good segmentation 1](/result/output1739.jpg)
+![Example of good segmentation 2](/result/output1757.jpg)
 
 Poor Visual Results
-![Example of poor segmentation 1](result/output1721.jpg)
-![Example of good segmentation 2](result/output1730.jpg)
+![Example of poor segmentation 1](/result/output1721.jpg)
+![Example of good segmentation 2](/result/output1730.jpg)
