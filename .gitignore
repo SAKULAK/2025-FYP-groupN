@@ -173,11 +173,6 @@ cython_debug/
 # Ignore Images in data file
 data/
 
-!data/img_1721.jpg
-!data/img_1730.jpg
-!data/img_1739.jpg
-!data/img_1757.jpg
-
 
 # Ignore .DS_Store files for Mac users
 .DS_Store
@@ -185,8 +180,3 @@ data/
 # Ignore Images in result folder
 result/*.jpg
 result/*.jpeg
-
-!result/output1721.jpg
-!result/output1730.jpg
-!result/output1739.jpg
-!result/output1757.jpg
