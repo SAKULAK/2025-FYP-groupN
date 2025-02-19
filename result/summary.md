@@ -30,18 +30,18 @@ Looking at the rating mode of each picture, there were 78 images with no hair (0
 In step three of our project we segmented hair with TELEA method, based on the template code from the lecture. Below are examples of visually successful and unsuccessful results:
 
 #### Good Visual Results
-![Example of poor segmentation 1-original](/result/img_1721.jpg)
+![Example of poor segmentation 1-original](/result/img_1721.png)
 ![Example of poor segmentation 1-result](/result/output1721.jpg)
-![Example of poor segmentation 2-original](/result/img_1730.jpg)
+![Example of poor segmentation 2-original](/result/img_1730.png)
 ![Example of good segmentation 2-result](/result/output1730.jpg)
 
 We can see that the hair was selected and removed very successfuly.
 
 #### Poor Visual Results
 
-![Example of good segmentation 1-original](/result/img_1739.jpg)
+![Example of good segmentation 1-original](/result/img_1739.png)
 ![Example of good segmentation 1-result](/result/output1739.jpg)
-![Example of good segmentation 1-original](/result/img_1757.jpg)
+![Example of good segmentation 1-original](/result/img_1757.png)
 ![Example of good segmentation 2-result](/result/output1757.jpg)
 
 Here we can see that most of the hair was selected and removed successfuly but there is some remaining hair.
