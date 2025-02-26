@@ -45,3 +45,8 @@ We can see that the hair was selected and removed very successfuly.
 ![Example of good segmentation 2-result](/result/output1757.jpg)
 
 Here we can see that most of the hair was selected and removed successfuly but there is some remaining hair.
+
+## Conclusion
+
+Different evaluations of the data showed some variation, and the applied method for image enhancement produced mixed results, with both successful and less effective outcomes.
+The findings emphasize the role of preprocessing in image analysis. Further improvements could refine the approach and contribute to more effective assessments in the future.
